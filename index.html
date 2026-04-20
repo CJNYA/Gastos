@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Peluquería</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <h1>💇 GESTIÓN PELUQUERÍA</h1>
+
+  <div class="toolbar">
+    <button id="excelBtn">📊 Excel</button>
+    <button id="pdfBtn">📄 PDF</button>
+    <button onclick="location.href='costes.html'">📈 Costes</button>
+  </div>
+
+  <div class="grid">
+
+    <!-- FIJO -->
+    <div class="bloque">
+      <h2 class="fijo">GASTOS FIJOS</h2>
+
+      <div class="sub-toolbar">
+        <button id="addFijo">➕ Añadir</button>
+        <button id="delFijo">🗑 Eliminar</button>
+        <button id="resetFijo">♻ Resetear</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="checkFijo"></th>
+            <th>Descripción</th>
+            <th>Cantidad (€)</th>
+          </tr>
+        </thead>
+        <tbody id="tablaFijo"></tbody>
+      </table>
+    </div>
+
+    <!-- VARIABLE -->
+    <div class="bloque">
+      <h2 class="variable">GASTOS VARIABLES</h2>
+
+      <div class="sub-toolbar">
+        <button id="addVar">➕ Añadir</button>
+        <button id="delVar">🗑 Eliminar</button>
+        <button id="resetVar">♻ Resetear</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="checkVar"></th>
+            <th>Descripción</th>
+            <th>Cantidad (€)</th>
+          </tr>
+        </thead>
+        <tbody id="tablaVar"></tbody>
+      </table>
+    </div>
+
+    <!-- INGRESOS -->
+    <div class="bloque">
+      <h2 class="ingreso">INGRESOS</h2>
+
+      <div class="sub-toolbar">
+        <button id="addIng">➕ Añadir</button>
+        <button id="delIng">🗑 Eliminar</button>
+        <button id="resetIng">♻ Resetear</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="checkIng"></th>
+            <th>Fecha</th>
+            <th>Cantidad (€)</th>
+          </tr>
+        </thead>
+        <tbody id="tablaIng"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

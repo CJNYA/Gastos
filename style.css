@@ -1,0 +1,166 @@
+/* RESET BÁSICO */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.app {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #cdcaca;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* TÍTULO */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* TOOLBAR SUPERIOR */
+.toolbar {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* BOTONES */
+button {
+  margin: 5px;
+  padding: 10px 14px;
+  border: none;
+  background: #4f60fe;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #3b4de0;
+  transform: scale(1.05);
+}
+
+/* GRID DE 3 COLUMNAS */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+/* BLOQUES */
+.bloque {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* TÍTULOS DE BLOQUE */
+.bloque h2 {
+  text-align: center;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* COLORES POR BLOQUE */
+.fijo {
+  background: #e53e3e;
+}
+
+.variable {
+  background: #dd6b20;
+}
+
+.ingreso {
+  background: #38a169;
+}
+
+/* SUB BOTONES */
+.sub-toolbar {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.sub-toolbar button {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+/* TABLAS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ENCABEZADO */
+th {
+  background: #76b0eb;
+  padding: 8px;
+  font-size: 13px;
+}
+
+/* CELDAS */
+td {
+  border: 1px solid #e2e8f0;
+  padding: 6px;
+  font-size: 13px;
+}
+
+/* FILAS ALTERNAS */
+tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+/* CAMPOS EDITABLES */
+td[contenteditable] {
+  background: #fffbea;
+}
+
+/* INPUT FECHA */
+input[type="date"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* CHECKBOX */
+input[type="checkbox"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+@media print {
+  .toolbar, .sub-toolbar {
+    display: none;
+  }
+}
+#resumenPDF {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+@media print {
+  .toolbar,
+  .sub-toolbar {
+    display: none;
+  }
+
+  #resumenPDF {
+    display: block;
+  }
+}
+@media print {
+  button {
+    display: none !important;
+  }
+}
