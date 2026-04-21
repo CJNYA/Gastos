@@ -224,18 +224,23 @@ if (!datos.fijo || !datos.var || !datos.ing) {
   XLSX.writeFile(wb, "peluqueria.xlsx");
 };
 
- document.getElementById("pdfBtn").onclick = () => {
-  generarResumenPDF();
+document.getElementById("pdfBtn").onclick = () => {
+
+  generarResumenParaPDF();
+
   setTimeout(() => {
     window.print();
+
+    // volver a ocultarlo después
+    document.getElementById("resumenPDF").style.display = "none";
+
   }, 200);
 };
-
   render();
 
 });
 
-function generarResumenPDF() {
+function generarResumenParaPDF() {
 
   const datos = JSON.parse(localStorage.getItem("datos")) || {
     fijo: [],
@@ -243,22 +248,24 @@ function generarResumenPDF() {
     ing: []
   };
 
-  let fijo = datos.fijo.reduce((a,b) => a + b.v, 0);
-  let variable = datos.var.reduce((a,b) => a + b.v, 0);
-  let ingreso = datos.ing.reduce((a,b) => a + b.v, 0);
+  let fijo = datos.fijo.reduce((a,b) => a + (b.v || 0), 0);
+  let variable = datos.var.reduce((a,b) => a + (b.v || 0), 0);
+  let ingreso = datos.ing.reduce((a,b) => a + (b.v || 0), 0);
 
   const contenedor = document.getElementById("resumenPDF");
 
-  if (!contenedor) return;
-
   contenedor.innerHTML = `
-    <h2>📊 RESUMEN FINAL</h2>
-    <p>💰 Gastos Fijos: ${fijo.toFixed(2)} €</p>
-    <p>💸 Gastos Variables: ${variable.toFixed(2)} €</p>
-    <p>📈 Ingresos: ${ingreso.toFixed(2)} €</p>
-    <hr>
-    <h2>🧮 Beneficio: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
+    <div class="resumen-box">
+      <h2>📊 RESUMEN</h2>
+      <p>💰 Gastos Fijos: ${fijo.toFixed(2)} €</p>
+      <p>💸 Gastos Variables: ${variable.toFixed(2)} €</p>
+      <p>📈 Ingresos: ${ingreso.toFixed(2)} €</p>
+      <hr>
+      <h2>🧮 Beneficios: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
+    </div>
   `;
+
+  contenedor.style.display = "block";
 }
 
 function actualizarCostes() {
@@ -282,7 +289,7 @@ function actualizarCostes() {
     <h3>💸 Gastos Variables: ${variable.toFixed(2)} €</h3>
     <h3>📈 Ingresos: ${ingreso.toFixed(2)} €</h3>
     <hr>
-    <h2>🧮 Beneficio: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
+    <h2>🧮 Beneficios: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
   `;
 }
 
@@ -316,7 +323,7 @@ function calcularCostes() {
     <h3>💸 Gastos Variables: ${variable.toFixed(2)} €</h3>
     <h3>📈 Ingresos: ${ingreso.toFixed(2)} €</h3>
     <hr>
-    <h2>🧮 Beneficio: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
+    <h2>🧮 Beneficios: ${(ingreso - (fijo + variable)).toFixed(2)} €</h2>
   `;
 }
 
@@ -325,3 +332,62 @@ document.addEventListener("DOMContentLoaded", () => {
     calcularCostes();
   }
 });
+
+document.getElementById("exportJsonBtn")?.addEventListener("click", () => {
+
+  const datos = JSON.parse(localStorage.getItem("datos")) || {
+    fijo: [],
+    var: [],
+    ing: []
+  };
+
+  const blob = new Blob([JSON.stringify(datos, null, 2)], {
+    type: "application/json"
+  });
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "backup_peluqueria.json";
+  a.click();
+});
+
+const fileInput = document.getElementById("fileInput");
+
+document.getElementById("importJsonBtn")?.addEventListener("click", () => {
+  fileInput.click();
+});
+
+fileInput?.addEventListener("change", (e) => {
+
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    try {
+      const datos = JSON.parse(event.target.result);
+
+      // Validación básica
+      if (!datos.fijo || !datos.var || !datos.ing) {
+        alert("Archivo no válido");
+        return;
+      }
+
+      localStorage.setItem("datos", JSON.stringify(datos));
+
+      alert("Datos importados correctamente ✔");
+      location.reload();
+
+    } catch {
+      alert("Error al leer el archivo");
+    }
+  };
+
+  reader.readAsText(file);
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+

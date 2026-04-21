@@ -121,7 +121,7 @@ tr:nth-child(even) {
 
 /* CAMPOS EDITABLES */
 td[contenteditable] {
-  background: #fffbea;
+  background: #efe8cc;
 }
 
 /* INPUT FECHA */
@@ -143,24 +143,26 @@ input[type="checkbox"] {
   }
 }
 #resumenPDF {
-  margin-top: 20px;
-  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.resumen-box {
   border: 2px solid black;
+  padding: 15px;
+  border-radius: 10px;
+  background: white;
   text-align: center;
 }
 
 @media print {
+
   .toolbar,
   .sub-toolbar {
-    display: none;
+    display: none !important;
   }
 
   #resumenPDF {
-    display: block;
+    display: block !important;
   }
 }
-@media print {
-  button {
-    display: none !important;
-  }
-}
+
