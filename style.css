@@ -165,4 +165,49 @@ input[type="checkbox"] {
     display: block !important;
   }
 }
+/* ===== MODO MÓVIL ===== */
+@media (max-width: 600px) {
 
+  /* Ajustar márgenes */
+  .app {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  /* Título más pequeño */
+  h1 {
+    font-size: 20px;
+  }
+
+  /* Botones en 2 columnas */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .toolbar button {
+    flex: 1 1 48%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  /* Tabla con scroll horizontal */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Celdas más compactas */
+  th, td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  /* Inputs más cómodos */
+  input[type="date"] {
+    min-width: 120px;
+  }
+
+}
